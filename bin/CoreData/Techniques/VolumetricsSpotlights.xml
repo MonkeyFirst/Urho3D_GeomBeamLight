@@ -1,0 +1,3 @@
+<technique vs="VolumetricsSpotlights" ps="VolumetricsSpotlights" psdefines="DIFFMAP">
+    <pass name="alpha" depthwrite="false" blend="add" />
+</technique>
