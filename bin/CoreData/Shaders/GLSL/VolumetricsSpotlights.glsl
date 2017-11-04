@@ -7,6 +7,7 @@
 uniform float cBeamAttenuation;
 uniform float cBeamAnglePower;
 uniform float cBeamIntensity;
+uniform float cBeamFadeScale;
 #endif
 
 #if defined(PLANESPOT)
@@ -22,7 +23,8 @@ varying vec3 vViewPos;
 varying vec3 vSpotForwardWorld;
 varying vec3 vSpotForwardView;
 varying float vAngle;
-
+varying vec4 vScreenPos;
+    
 #ifdef COMPILEVS
 
 vec3 GetViewFarRay(vec4 clipPos)
@@ -61,7 +63,7 @@ void VS()
     // Get normal of  geom light in view space
     vNormal = GetViewNormal(cView);
     vViewPos = normalize(GetViewPos(cView));
-    
+    vScreenPos = GetScreenPos(gl_Position);
     
     vSpotlightPosition = (vec4(0,0,0,1.0) * modelMatrix).xyz;
     vFarRay = GetFarRay(gl_Position);
@@ -143,6 +145,28 @@ void PS()
     intensity	= intensity * angleIntensity;
         
     vec4 diffColor = cMatDiffColor;
+        
+    //SOFT
+    float BeamDepth = vWorldPos.w;
+    #ifdef HWDEPTH
+        float depth = ReconstructDepth(texture2DProj(sDepthBuffer, vScreenPos).r);
+    #else
+        float depth = DecodeDepth(texture2DProj(sDepthBuffer, vScreenPos).rgb);
+    #endif
+
+    float diffZ = (depth - BeamDepth) * (cFarClipPS - cNearClipPS);
+    float fade = clamp(1.0 - diffZ * cBeamFadeScale, 0.0, 1.0);
+    
+    //float diffZ = max(BeamDepth - depth, 0.0) * (cFarClipPS - cNearClipPS);
+    //float fade = clamp(diffZ * cBeamFadeScale, 0.0, 1.0);
+    
+    #define ADDITIVE
+    #ifndef ADDITIVE
+        diffColor.a = max(diffColor.a - fade, 0.0);
+    #else
+        diffColor.rgb = max(diffColor.rgb - fade, vec3(0.0, 0.0, 0.0));
+    #endif
+    
     gl_FragColor = vec4(intensity * diffColor);
 #else
     vec4 diffInput = texture2D(sDiffMap, vTexCoord);

@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <material>
-	<technique name="Techniques/VolumetricsSpotlights.xml" quality="0" loddistance="0" />
+	<technique name="Techniques/VolumetricsSpotlightsAdd.xml" quality="0" loddistance="0" />
 	<parameter name="UOffset" value="1 0 0 0" />
 	<parameter name="VOffset" value="0 1 0 0" />
-	<parameter name="MatDiffColor" value="0.296 0.288 0.213 1" />
+	<parameter name="MatDiffColor" value="0.553 1 0.574 1.18" />
 	<parameter name="MatEmissiveColor" value="0 0 0" />
 	<parameter name="MatEnvMapColor" value="1 1 1" />
 	<parameter name="MatSpecColor" value="0 0 0 1" />
 	<parameter name="Roughness" value="0.5" />
 	<parameter name="Metallic" value="0" />
-	<parameter name="BeamAttenuation" value="4.3" />
-	<parameter name="BeamAnglePower" value="3.66" />
-	<parameter name="BeamIntensity" value="1" />
-	<parameter name="BeamFadeScale" value="1" />
+	<parameter name="BeamAttenuation" value="3.9" />
+	<parameter name="BeamAnglePower" value="2.82" />
+	<parameter name="BeamIntensity" value="1.11" />
+	<parameter name="BeamFadeScale" value="1.99" />
 	<cull value="none" />
 	<shadowcull value="none" />
 	<fill value="solid" />
