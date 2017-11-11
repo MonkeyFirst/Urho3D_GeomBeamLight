@@ -1,0 +1,3 @@
+<technique vs="GeomBeamSpotlight" ps="GeomBeamSpotlight" psdefines="DIFFMAP">
+    <pass name="alpha" depthwrite="false" blend="add" />
+</technique>

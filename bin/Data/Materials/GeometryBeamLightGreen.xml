@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <material>
-	<technique name="Techniques/VolumetricsSpotlightsAdd.xml" quality="0" loddistance="0" />
+	<technique name="Techniques/GeomBeamSpotlightsAdd.xml" quality="0" loddistance="0" />
 	<parameter name="UOffset" value="1 0 0 0" />
 	<parameter name="VOffset" value="0 1 0 0" />
 	<parameter name="MatDiffColor" value="0.553 1 0.574 1.18" />
@@ -12,7 +12,8 @@
 	<parameter name="BeamAttenuation" value="3.9" />
 	<parameter name="BeamAnglePower" value="2.82" />
 	<parameter name="BeamIntensity" value="1.11" />
-	<parameter name="BeamFadeScale" value="1.99" />
+	<parameter name="BeamFadeScale" value="1.94" />
+	<parameter name="BeamForwardPower" value="0.66" />
 	<cull value="none" />
 	<shadowcull value="none" />
 	<fill value="solid" />
