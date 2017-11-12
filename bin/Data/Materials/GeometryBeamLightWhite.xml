@@ -11,7 +11,7 @@
 	<parameter name="Metallic" value="0" />
 	<parameter name="BeamAttenuation" value="2.77" />
 	<parameter name="BeamAnglePower" value="3.98" />
-	<parameter name="BeamIntensity" value="1.13" />
+	<parameter name="BeamIntensity" value="1" />
 	<parameter name="BeamFadeScale" value="3.18" />
 	<parameter name="BeamForwardPower" value="0.41" />
 	<cull value="none" />

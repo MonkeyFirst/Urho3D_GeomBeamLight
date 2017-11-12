@@ -9,11 +9,11 @@
 	<parameter name="MatSpecColor" value="0 0 0 1" />
 	<parameter name="Roughness" value="0.5" />
 	<parameter name="Metallic" value="0" />
-	<parameter name="BeamAttenuation" value="4" />
-	<parameter name="BeamAnglePower" value="1" />
-	<parameter name="BeamIntensity" value="1.08" />
+	<parameter name="BeamAttenuation" value="6.87" />
+	<parameter name="BeamAnglePower" value="-0.35" />
+	<parameter name="BeamIntensity" value="1" />
 	<parameter name="BeamFadeScale" value="1" />
-	<parameter name="BeamForwardPower" value="0.27" />
+	<parameter name="BeamForwardPower" value="0.61" />
 	<cull value="none" />
 	<shadowcull value="none" />
 	<fill value="solid" />
