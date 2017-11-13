@@ -50,8 +50,7 @@ vec3 GetViewNormal(mat4 viewMatrix)
     // object normal to view space
     return normalize(obNormal * mat3(viewMatrix));
 }
-
-#line 60
+#line 53
 void VS()
 {
     mat4 modelMatrix = iModelMatrix;
@@ -64,18 +63,22 @@ void VS()
     //vec3 vNormalVS = GetViewNormal(cView);
     vec3 vNormalWS = GetWorldNormal(modelMatrix);
     
-    vec3 vSpotlightPosition = (vec4(0,0,0,1.0) * modelMatrix).xyz;
+    vec3 vSpotlightPosition = (vec4(0,0,0,1) * modelMatrix).xyz;
     vec3 vSpotForwardWorld = normalize((vec4(0,-1,0,0) * iModelMatrix).xyz);
     vec3 vSpotForwardView = normalize(vSpotForwardWorld * mat3(cView));
     
     vec3 eyeDir = normalize(cCameraPos - vWorldPos.xyz);
     
     BEAM_FOV = abs(dot(vSpotForwardWorld, normalize(cCameraPos - vSpotlightPosition)));
-    BEAM_INTENSITY = distance(vWorldPos.xyz, vSpotlightPosition) / cBeamAttenuation;
-    BEAM_INTENSITY = 1.0 - clamp(BEAM_INTENSITY, 0.0, 1.0);    
-    BEAM_INTENSITY_ANGLE = pow(clamp(abs(dot(vNormalWS, eyeDir)), 0, 1), cBeamAnglePower);
-    BEAM_INTENSITY_FORWARD = clamp(abs(dot(vSpotForwardView, vec3(0,0,1))), 0, 1);
-    BEAM_INTENSITY_FORWARD *= cBeamForwardPower; 
+    float fIntensity = distance(vWorldPos.xyz, vSpotlightPosition) / cBeamAttenuation;
+    BEAM_INTENSITY = 1.0 - clamp(fIntensity, 0.0, 1.0);
+    //float angle = clamp(abs(dot(vNormalWS, eyeDir)), 0.0, 1.0);
+    float angle = min(max(abs(dot(vNormalWS, eyeDir)), 0.0), 1.0);
+    BEAM_INTENSITY_ANGLE = pow(angle, cBeamAnglePower);
+    //float fForward = clamp(abs(dot(vSpotForwardView, vec3(0,0,1))), 0, 1);
+    float fForward = min(max(abs(dot(vSpotForwardView, vec3(0,0,1))), 0.0), 1.0);
+    
+    BEAM_INTENSITY_FORWARD = fForward * cBeamForwardPower;
 }
 
 #endif
